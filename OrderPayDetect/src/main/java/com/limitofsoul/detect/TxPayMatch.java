@@ -17,6 +17,7 @@ import scala.Tuple2;
 
 import java.util.Objects;
 
+// 判断pay事件和支付事件是否匹配
 public class TxPayMatch {
 
     private final static OutputTag<OrderEvent> unmatchedPays = new OutputTag<OrderEvent>("unmatched-pays") {
@@ -47,7 +48,7 @@ public class TxPayMatch {
                 }).assignTimestampsAndWatermarks(new AscendingTimestampExtractor<ReceiveEvent>() {
                     @Override
                     public long extractAscendingTimestamp(ReceiveEvent receiveEvent) {
-                        return receiveEvent.getTimestamp();
+                        return receiveEvent.getTimestamp() * 1000L;
                     }
                 });
 
@@ -107,6 +108,7 @@ public class TxPayMatch {
                     }
                 });
 
+        resultStream.print();
         resultStream.getSideOutput(unmatchedPays).print("unmatched-pays");
         resultStream.getSideOutput(unmatchedReceipts).print("unmatched-receipts");
         env.execute();
