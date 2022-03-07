@@ -17,6 +17,7 @@ import org.apache.flink.util.OutputTag;
 
 import java.util.Objects;
 
+// 检测创建了但超过15分钟没有支付、创建但超时支付、只支付未创建的订单
 public class OrderTimeoutWithoutCep {
 
     private final static OutputTag<OrderResult> orderTimeoutTag = new OutputTag<OrderResult>("order-timeout") {
