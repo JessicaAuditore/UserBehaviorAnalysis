@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 // 检测2秒内连续登录失败次数
+// 以用户id分组，每来一个登录失败时间事件，保存并看和前一个登录失败事件的时间差是否小于2s，但不能处理乱序数据
 public class LoginFail {
 
     public static void main(String[] args) throws Exception {

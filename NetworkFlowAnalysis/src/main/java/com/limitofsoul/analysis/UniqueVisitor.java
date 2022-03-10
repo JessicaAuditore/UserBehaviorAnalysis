@@ -16,7 +16,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-// 统计1小时内网站独立访客数uv
+// 统计每小时的网站独立访客数uv
+// 过滤非pv操作日志，不分组开窗，关窗时输出去重输出每个窗口内的访客数
 public class UniqueVisitor {
 
     public static void main(String[] args) throws Exception {

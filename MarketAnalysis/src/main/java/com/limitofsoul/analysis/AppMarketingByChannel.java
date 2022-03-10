@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 // 分渠道统计市场
+// 过滤卸载日志，按安装渠道和行为分组开窗，得到每个窗口内每个渠道每个行为的统计数据
 public class AppMarketingByChannel {
 
     public static void main(String[] args) throws Exception {

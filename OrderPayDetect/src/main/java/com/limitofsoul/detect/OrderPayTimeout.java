@@ -18,6 +18,7 @@ import org.apache.flink.util.OutputTag;
 import java.util.Objects;
 
 // 检测创建了但超过15分钟没有支付、创建但超时支付、只支付未创建的订单
+// 根据订单id分组，每来一个创建事件，如果已经支付，则输出，否则定时15分钟，15分钟内支付事件已来则删除定时器，定时器时间到，将未支付事件输出到侧输出流，每来一个支付事件同理
 public class OrderPayTimeout {
 
     private final static OutputTag<OrderResult> orderTimeoutTag = new OutputTag<OrderResult>("order-timeout") {

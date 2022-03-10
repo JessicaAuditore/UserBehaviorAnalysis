@@ -24,6 +24,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 // 每5分钟统计1个小时内基于省份的广告点击量
+// 以用户id和广告id分组，用户对广告的点击量超过阈值就报警，再按省份分组开窗，得到每个窗口内每个省份的广告点击量
 public class AdStatisticsByProvince {
 
     public static void main(String[] args) throws Exception {

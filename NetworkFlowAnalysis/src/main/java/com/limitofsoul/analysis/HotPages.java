@@ -29,6 +29,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 // 每5秒统计一次10分钟以内的热门页面
+// 过滤非get请求和资源文件，按url分组开窗，得到每个窗口内每个url请求的count，再按窗口分组，定时器定到窗口关闭的时间，保存每个窗口内所有url的count状态，排序输出
 public class HotPages {
 
     public static void main(String[] args) throws Exception {
@@ -72,7 +73,7 @@ public class HotPages {
         env.execute();
     }
 
-    // 自定义豫聚合函数
+    // 自定义预聚合函数
     static class PageCountAgg implements AggregateFunction<ApacheLogEvent, Long, Long> {
         @Override
         public Long createAccumulator() {

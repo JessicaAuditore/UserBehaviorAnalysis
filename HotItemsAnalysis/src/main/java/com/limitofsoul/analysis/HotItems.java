@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 // 每5分钟统计一次1小时内的热门商品
+// 过滤非pv操作日志，按商品id分组开窗，得到每个窗口内每个商品浏览的count，再按窗口分组，定时器定到到窗口关闭的时间，保存每个窗口内所有商品浏览的count状态，定时器到时排序输出
 public class HotItems {
 
     public static void main(String[] args) throws Exception{
@@ -32,14 +33,14 @@ public class HotItems {
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
-//        DataStream<String> inputStream = env.readTextFile("HotItemsAnalysis/src/main/resources/UserBehavior.csv");
-        Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "192.168.50.16:9091,192.168.50.16:9092,192.168.50.16:9093");
-        properties.setProperty("group.id", "consumer-group");
-        properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.setProperty("auto.offset.reset", "latest");
-        DataStream<String> inputStream = env.addSource(new FlinkKafkaConsumer<String>("hotItems", new SimpleStringSchema(), properties));
+        DataStream<String> inputStream = env.readTextFile("HotItemsAnalysis/src/main/resources/UserBehavior.csv");
+//        Properties properties = new Properties();
+//        properties.setProperty("bootstrap.servers", "192.168.50.16:9091,192.168.50.16:9092,192.168.50.16:9093");
+//        properties.setProperty("group.id", "consumer-group");
+//        properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+//        properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+//        properties.setProperty("auto.offset.reset", "latest");
+//        DataStream<String> inputStream = env.addSource(new FlinkKafkaConsumer<String>("hotItems", new SimpleStringSchema(), properties));
 
         DataStream<UserBehavior> dataStream = inputStream.map(line -> {
             String[] fields = line.split(",");

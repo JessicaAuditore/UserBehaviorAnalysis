@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 
 // 检测2秒内连续登录失败次数 cep 可以解决由于乱序数据导致的复杂事件
+// 根据实际需求定义一个匹配模式，例如连续三次登录失败，再将匹配模式应用到数据流上，检出符合条件的复杂事件
 public class LoginFailWithCep {
 
     public static void main(String[] args) throws Exception {

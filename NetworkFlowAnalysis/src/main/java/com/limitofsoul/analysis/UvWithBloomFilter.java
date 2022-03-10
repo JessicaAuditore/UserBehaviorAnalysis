@@ -20,6 +20,7 @@ import redis.clients.jedis.Jedis;
 import java.util.Objects;
 
 // 统计1小时内网站独立访客数uv 布隆过滤器去重(防止set内存占用过大)
+// 防止窗口内访客数过大，可以使用布隆过滤器(redis中的setbit实现，窗口关闭时间作为key)，将每个用户作为布隆过滤器中的一位来判断用户是否访问过，每来一条数据就访问一下布隆过滤器(getbit)
 public class UvWithBloomFilter {
 
     public static void main(String[] args) throws Exception {

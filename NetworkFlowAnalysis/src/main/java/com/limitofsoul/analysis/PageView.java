@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.Random;
 
 // 统计1小时内网络浏览量pv
+// 过滤非pv操作日志，随机key分组开窗，得到每个窗口内商品浏览总量，再按窗口分组，定时器定到窗口关闭的时间，保存每个窗口内浏览总量状态，定时器到时输出浏览总量
 public class PageView {
 
     public static void main(String[] args) throws Exception {

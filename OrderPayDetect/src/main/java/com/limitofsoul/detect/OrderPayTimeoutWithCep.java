@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Objects;
 
 // 检测创建了但超过15分钟没有支付、创建但超时支付、只支付未创建的订单(cep实现)
+// 定义匹配模式，一个创建订单事件跟着一个支付事件且在15分钟内，将不满足匹配模式的数据通过侧输出流输出
 public class OrderPayTimeoutWithCep {
 
     public static void main(String[] args) throws Exception {

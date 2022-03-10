@@ -15,6 +15,7 @@ import scala.Tuple2;
 import java.util.Objects;
 
 // 判断pay事件和支付事件是否匹配 join实现
+// pay事件流通过id和receive事件流intervalJoin，定义可以早来或晚到，但只能接收到两个事件都匹配的情况
 public class TxPayMatchByJoin {
 
     public static void main(String[] args) throws Exception {

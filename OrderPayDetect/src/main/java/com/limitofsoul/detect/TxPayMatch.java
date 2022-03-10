@@ -18,6 +18,7 @@ import scala.Tuple2;
 import java.util.Objects;
 
 // 判断pay事件和支付事件是否匹配
+// pay事件流过滤非pay事件数据，pay事件流connect接收日志流，通过两个id分组，每来一个pay事件或receive事件则设置定时器将不匹配的订单输出到对应的侧输出流
 public class TxPayMatch {
 
     private final static OutputTag<OrderEvent> unmatchedPays = new OutputTag<OrderEvent>("unmatched-pays") {
